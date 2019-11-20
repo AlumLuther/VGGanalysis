@@ -51,7 +51,16 @@ for f in vgg.features[0:10]:
         layerCnt += 1
         paraCnt = np.zeros(11)
 
-fig.show()
+# fig.show()
 
-print(vgg.features[0].weight.data)
+# print(vgg.features[0].weight.data)
+
+a = torch.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [3.0, 3.0, 3.0]])
+b = torch.tensor([[2.0, 4.0, 6.0], [4.0, 5.0, 6.0], [-3.0, -3.0, -3.0]])
+print(torch.cosine_similarity(a, b, dim=1))
+a.resize_(9)
+b.resize_(9)
+print(torch.cosine_similarity(a, b, dim=0))
+
+print(torch.cosine_similarity(vgg.features[0].weight.data[0][0].view(9), vgg.features[0].weight.data[0][1].view(9), 0))
 # 如第一个卷积层torch.size([64,3,3,3])，64个卷积核，每个是3通道/层（也即上一层卷积核的个数），大小为3X3
