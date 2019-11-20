@@ -29,9 +29,8 @@ vgg.load_state_dict(pre)
 layerCnt = 1
 filters, channels, kernelWidth, kernelHeight = 0, 0, 0, 0
 paraCnt = np.zeros(11)
-fig = plt.figure()
 
-for f in vgg.features[0:10]:
+for f in vgg.features:
     if isinstance(f, nn.Conv2d):
         print(layerCnt, '\t', f)
         filters, channels, kernelWidth, kernelHeight = \
@@ -43,24 +42,21 @@ for f in vgg.features[0:10]:
                     for l in range(0, kernelHeight):
                         powerResTemp = powerRes(f.weight.data[i][j][k][l].item())
                         paraCnt[powerResTemp] += 1
-        ax = fig.add_subplot(4, 4, layerCnt)
-        ax.plot(np.arange(-10, 1), paraCnt[0:11])
-        ax.set_ylabel('计数/个', FontProperties=font)
-        ax.set_xlabel('参数的数量级/10为底对数', FontProperties=font)
-        ax.set_title('第' + str(layerCnt) + '层卷积核参数分布图', FontProperties=font)
+        plt.plot(np.arange(-10, 1), paraCnt[0:11])
+        plt.ylabel('计数/个', FontProperties=font)
+        plt.xlabel('参数的数量级/10为底对数', FontProperties=font)
+        plt.title('第' + str(layerCnt) + '层卷积核参数分布图', FontProperties=font)
+        plt.savefig("./fig/"+str(layerCnt)+".jpg")
+        plt.close()
         layerCnt += 1
         paraCnt = np.zeros(11)
 
-# fig.show()
+# a = torch.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [3.0, 3.0, 3.0]])
+# b = torch.tensor([[2.0, 4.0, 6.0], [4.0, 5.0, 6.0], [-3.0, -3.0, -3.0]])
+# print(torch.cosine_similarity(a, b, dim=1))
+# a.resize_(9)
+# b.resize_(9)
+# print(torch.cosine_similarity(a, b, dim=0))
 
 # print(vgg.features[0].weight.data)
-
-a = torch.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [3.0, 3.0, 3.0]])
-b = torch.tensor([[2.0, 4.0, 6.0], [4.0, 5.0, 6.0], [-3.0, -3.0, -3.0]])
-print(torch.cosine_similarity(a, b, dim=1))
-a.resize_(9)
-b.resize_(9)
-print(torch.cosine_similarity(a, b, dim=0))
-
 print(torch.cosine_similarity(vgg.features[0].weight.data[0][0].view(9), vgg.features[0].weight.data[0][1].view(9), 0))
-# 如第一个卷积层torch.size([64,3,3,3])，64个卷积核，每个是3通道/层（也即上一层卷积核的个数），大小为3X3

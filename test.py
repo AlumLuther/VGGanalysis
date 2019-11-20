@@ -11,7 +11,7 @@ tran = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-im = './1.jpg'
+im = './input.jpg'
 im = Image.open(im)
 im = tran(im)
 im.unsqueeze_(dim=0)
