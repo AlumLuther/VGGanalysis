@@ -26,30 +26,62 @@ vgg = models.vgg16_bn()
 pre = torch.load('../vgg16_bn-6c64b313.pth')
 vgg.load_state_dict(pre)
 
-layerCnt = 1
+convLayerCnt = 1
+bnLayerCnt = 1
 filters, channels, kernelWidth, kernelHeight = 0, 0, 0, 0
 paraCnt = np.zeros(11)
 
 for f in vgg.features:
     if isinstance(f, nn.Conv2d):
-        print(layerCnt, '\t', f)
+        print(convLayerCnt, '\t', f)
         filters, channels, kernelWidth, kernelHeight = \
             f.weight.size()[0], f.weight.size()[1], f.weight.size()[2], f.weight.size()[3]
-        print(f.weight.size())
         for i in range(0, filters):
-            for j in range(0, channels):
-                for k in range(0, kernelWidth):
-                    for l in range(0, kernelHeight):
-                        powerResTemp = powerRes(f.weight.data[i][j][k][l].item())
-                        paraCnt[powerResTemp] += 1
+            curFilter1d = f.weight.data[i].view(channels * 9).numpy()
+            for j in curFilter1d:
+                powerResTemp = powerRes(j)
+                paraCnt[powerResTemp] += 1
+        total = filters * channels * kernelWidth * kernelHeight
+        paraCnt /= total
         plt.plot(np.arange(-10, 1), paraCnt[0:11])
-        plt.ylabel('计数/个', FontProperties=font)
-        plt.xlabel('参数的数量级/10为底对数', FontProperties=font)
-        plt.title('第' + str(layerCnt) + '层卷积核参数分布图', FontProperties=font)
-        plt.savefig("./fig/"+str(layerCnt)+".jpg")
+        plt.ylabel('percentage')
+        plt.xlabel('parament magnitude/lg')
+        plt.title('第' + str(convLayerCnt) + '个卷积层卷积核参数分布PDF', FontProperties=font)
+        plt.savefig("./fig/" + str(convLayerCnt) + "_conv_pdf.jpg")
         plt.close()
-        layerCnt += 1
-        paraCnt = np.zeros(11)
+        for i in range(1, len(paraCnt)):
+            paraCnt[i] += paraCnt[i - 1]
+        plt.plot(np.arange(-10, 1), paraCnt[0:11])
+        plt.ylabel('percentage')
+        plt.xlabel('parament magnitude/lg')
+        plt.title('第' + str(convLayerCnt) + '个卷积层卷积核参数分布CDF', FontProperties=font)
+        plt.savefig("./fig/" + str(convLayerCnt) + "_conv_cdf.jpg")
+        plt.close()
+        convLayerCnt += 1
+    elif isinstance(f, nn.BatchNorm2d):
+        print(bnLayerCnt, '\t', f)
+        filters = f.weight.size()[0]
+        tmp = f.weight.data.view(filters).numpy()
+        for i in tmp:
+            powerResTemp = powerRes(i)
+            paraCnt[powerResTemp] += 1
+        paraCnt /= filters
+        plt.plot(np.arange(-10, 1), paraCnt[0:11])
+        plt.ylabel('percentage')
+        plt.xlabel('parament magnitude/lg')
+        plt.title('第' + str(convLayerCnt) + '个BN层γ参数分布PDF', FontProperties=font)
+        plt.savefig("./fig/" + str(convLayerCnt) + "_γ_pdf.jpg")
+        plt.close()
+        for i in range(1, len(paraCnt)):
+            paraCnt[i] += paraCnt[i - 1]
+        plt.plot(np.arange(-10, 1), paraCnt[0:11])
+        plt.ylabel('percentage')
+        plt.xlabel('parament magnitude/lg')
+        plt.title('第' + str(convLayerCnt) + '个BN层γ参数分布CDF', FontProperties=font)
+        plt.savefig("./fig/" + str(convLayerCnt) + "_γ_cdf.jpg")
+        plt.close()
+        bnLayerCnt += 1
+    paraCnt = np.zeros(11)
 
 # a = torch.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [3.0, 3.0, 3.0]])
 # b = torch.tensor([[2.0, 4.0, 6.0], [4.0, 5.0, 6.0], [-3.0, -3.0, -3.0]])
@@ -57,6 +89,4 @@ for f in vgg.features:
 # a.resize_(9)
 # b.resize_(9)
 # print(torch.cosine_similarity(a, b, dim=0))
-
-# print(vgg.features[0].weight.data)
-print(torch.cosine_similarity(vgg.features[0].weight.data[0][0].view(9), vgg.features[0].weight.data[0][1].view(9), 0))
+# print(torch.cosine_similarity(vgg.features[0].weight.data[0][0].view(9), vgg.features[0].weight.data[0][1].view(9), dim=0))

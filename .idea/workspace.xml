@@ -2,9 +2,72 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c354e233-4219-48a7-ae83-449bdc870974" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/fig/10_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/10_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/10_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/10_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/11_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/11_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/11_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/11_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/12_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/12_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/12_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/12_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/13_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/13_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/13_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/13_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/14_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/14_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/1_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/1_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/2_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/2_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/2_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/2_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/3_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/3_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/3_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/3_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/4_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/4_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/4_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/4_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/5_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/5_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/5_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/5_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/6_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/6_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/6_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/6_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/7_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/7_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/7_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/7_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/8_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/8_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/8_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/8_γ_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/9_conv_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/9_conv_pdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/9_γ_cdf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fig/9_γ_pdf.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fig/9.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vgg.py" beforeDir="false" afterPath="$PROJECT_DIR$/vgg.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,5 +152,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="vgg.features[1].weight.data" language="Python" />
+        <watch expression="vgg.features[1].weight" language="Python" />
+        <watch expression="f.weight.size()" />
+        <watch expression="f.weight.size()" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
