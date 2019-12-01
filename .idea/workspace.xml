@@ -2,47 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c354e233-4219-48a7-ae83-449bdc870974" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/94309.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/94309.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_conv_similarity_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_γ_pdf.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vgg.py" beforeDir="false" afterPath="$PROJECT_DIR$/vgg.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

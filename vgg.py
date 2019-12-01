@@ -51,7 +51,6 @@ for f in vgg.features:
         filterCnt, channelCnt, kernelWidth, kernelHeight = f.weight.size()[0], f.weight.size()[1], f.weight.size()[2], f.weight.size()[3]
         filterSize = channelCnt * kernelWidth * kernelHeight
         totalSize = filterCnt * filterSize
-
         # 将一层中的所有卷积核展平，成为二维数组
         allFilter1d = f.weight.data.view(filterCnt, filterSize).numpy()
         # 统计同一层之间卷积核相关系数
