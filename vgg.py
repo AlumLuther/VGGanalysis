@@ -40,6 +40,7 @@ pre = torch.load('../vgg16_bn-6c64b313.pth')
 vgg.load_state_dict(pre)
 
 layerCnt = 1
+layerCntStr = str(layerCnt)
 paraCnt = np.zeros(11)
 paraCntL1 = np.zeros(11)
 sns.set()
@@ -67,11 +68,10 @@ for f in vgg.features:
             paraCntL1[powerResTemp] += 1
         paraCnt /= totalSize
         paraCntL1 /= filterCnt
-        layerCntStr = str(layerCnt)
         # 绘制相关系数热图
         ax = sns.heatmap(allFilterSimilarity)
         plt.title("第" + layerCntStr + "层（卷积层）卷积核相关系数热图", FontProperties=font)
-        plt.savefig("./fig/" + layerCntStr + "_conv_similarity_heatmap.jpg")
+        plt.savefig("./fig/" + layerCntStr + "_conv_corrcoef_heatmap.jpg")
         plt.close()
         # 绘制参数及L1范数分布图
         plotAndSave(paraCnt, "第" + layerCntStr + "层（卷积层）卷积核参数分布PDF", "./fig/" + layerCntStr + "_conv_para_pdf.jpg")
@@ -95,5 +95,6 @@ for f in vgg.features:
             paraCnt[i] += paraCnt[i - 1]
         plotAndSave(paraCnt, "第" + layerCntStr + "层（BN层）γ参数分布CDF", "./fig/" + layerCntStr + "_γ_cdf.jpg")
     layerCnt += 1
+    layerCntStr = str(layerCnt)
     paraCnt = np.zeros(11)
     paraCntL1 = np.zeros(11)
