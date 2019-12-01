@@ -2,12 +2,15 @@ import torch
 import torch.nn as nn
 import torchvision.models as models
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
+
 from matplotlib.font_manager import FontProperties
 
 font = FontProperties(fname=r"C:\Windows\Fonts\simhei.ttf", size=14)
 
 
+# 计算参数的数量级
 def powerRes(myNum):
     if myNum < 0:
         myNum = -myNum
@@ -22,71 +25,75 @@ def powerRes(myNum):
     return res
 
 
+# 绘制并保存折线图
+def plotAndSave(w, title, filename):
+    plt.plot(np.arange(-10, 1), w)
+    plt.ylabel('percentage')
+    plt.xlabel('parament magnitude/lg')
+    plt.title(title, FontProperties=font)
+    plt.savefig(filename)
+    plt.close()
+
+
 vgg = models.vgg16_bn()
 pre = torch.load('../vgg16_bn-6c64b313.pth')
 vgg.load_state_dict(pre)
 
-convLayerCnt = 1
-bnLayerCnt = 1
-filters, channels, kernelWidth, kernelHeight = 0, 0, 0, 0
+layerCnt = 1
 paraCnt = np.zeros(11)
+paraCntL1 = np.zeros(11)
+sns.set()
 
 for f in vgg.features:
     if isinstance(f, nn.Conv2d):
-        print(convLayerCnt, '\t', f)
-        filters, channels, kernelWidth, kernelHeight = \
-            f.weight.size()[0], f.weight.size()[1], f.weight.size()[2], f.weight.size()[3]
-        for i in range(0, filters):
-            curFilter1d = f.weight.data[i].view(channels * 9).numpy()
-            for j in curFilter1d:
-                powerResTemp = powerRes(j)
+        print(layerCnt, '\t', f)
+        filterCnt, channelCnt, kernelWidth, kernelHeight = f.weight.size()[0], f.weight.size()[1], f.weight.size()[2], f.weight.size()[3]
+        filterSize = channelCnt * kernelWidth * kernelHeight
+        totalSize = filterCnt * filterSize
+
+        # 将一层中的所有卷积核展平，成为二维数组
+        allFilter1d = f.weight.data.view(filterCnt, filterSize).numpy()
+        # 统计同一层之间卷积核相关系数
+        allFilterSimilarity = np.corrcoef(allFilter1d)
+        # 统计卷积核的权重以及L1范数的分布
+        for i in range(0, filterCnt):
+            L1Norm = 0
+            for j in range(0, filterSize):
+                curWeight = allFilter1d[i][j]
+                L1Norm += abs(curWeight)
+                powerResTemp = powerRes(curWeight)
                 paraCnt[powerResTemp] += 1
-        total = filters * channels * kernelWidth * kernelHeight
-        paraCnt /= total
-        plt.plot(np.arange(-10, 1), paraCnt[0:11])
-        plt.ylabel('percentage')
-        plt.xlabel('parament magnitude/lg')
-        plt.title('第' + str(convLayerCnt) + '个卷积层卷积核参数分布PDF', FontProperties=font)
-        plt.savefig("./fig/" + str(convLayerCnt) + "_conv_pdf.jpg")
+            powerResTemp = powerRes(L1Norm)
+            paraCntL1[powerResTemp] += 1
+        paraCnt /= totalSize
+        paraCntL1 /= filterCnt
+        layerCntStr = str(layerCnt)
+        # 绘制相关系数热图
+        ax = sns.heatmap(allFilterSimilarity)
+        plt.title("第" + layerCntStr + "层（卷积层）卷积核相关系数热图", FontProperties=font)
+        plt.savefig("./fig/" + layerCntStr + "_conv_similarity_heatmap.jpg")
         plt.close()
+        # 绘制参数及L1范数分布图
+        plotAndSave(paraCnt, "第" + layerCntStr + "层（卷积层）卷积核参数分布PDF", "./fig/" + layerCntStr + "_conv_para_pdf.jpg")
+        plotAndSave(paraCntL1, "第" + layerCntStr + "层（卷积层）卷积核L1范数分布PDF", "./fig/" + layerCntStr + "_conv_L1norm_pdf.jpg")
         for i in range(1, len(paraCnt)):
             paraCnt[i] += paraCnt[i - 1]
-        plt.plot(np.arange(-10, 1), paraCnt[0:11])
-        plt.ylabel('percentage')
-        plt.xlabel('parament magnitude/lg')
-        plt.title('第' + str(convLayerCnt) + '个卷积层卷积核参数分布CDF', FontProperties=font)
-        plt.savefig("./fig/" + str(convLayerCnt) + "_conv_cdf.jpg")
-        plt.close()
-        convLayerCnt += 1
+            paraCntL1[i] += paraCntL1[i - 1]
+        plotAndSave(paraCnt, "第" + layerCntStr + "层（卷积层）卷积核参数分布CDF", "./fig/" + layerCntStr + "_conv_para_cdf.jpg")
+        plotAndSave(paraCntL1, "第" + layerCntStr + "层（卷积层）卷积核L1范数分布CDF", "./fig/" + layerCntStr + "_conv_L1norm_cdf.jpg")
     elif isinstance(f, nn.BatchNorm2d):
-        print(bnLayerCnt, '\t', f)
-        filters = f.weight.size()[0]
-        tmp = f.weight.data.view(filters).numpy()
+        print(layerCnt, '\t', f)
+        weightCnt = f.weight.size()[0]
+        tmp = f.weight.data.view(weightCnt).numpy()
         for i in tmp:
             powerResTemp = powerRes(i)
             paraCnt[powerResTemp] += 1
-        paraCnt /= filters
-        plt.plot(np.arange(-10, 1), paraCnt[0:11])
-        plt.ylabel('percentage')
-        plt.xlabel('parament magnitude/lg')
-        plt.title('第' + str(convLayerCnt) + '个BN层γ参数分布PDF', FontProperties=font)
-        plt.savefig("./fig/" + str(convLayerCnt) + "_γ_pdf.jpg")
-        plt.close()
+        paraCnt /= weightCnt
+        # 绘制参数分布图
+        plotAndSave(paraCnt, "第" + layerCntStr + "层（BN层）γ参数分布PDF", "./fig/" + layerCntStr + "_γ_pdf.jpg")
         for i in range(1, len(paraCnt)):
             paraCnt[i] += paraCnt[i - 1]
-        plt.plot(np.arange(-10, 1), paraCnt[0:11])
-        plt.ylabel('percentage')
-        plt.xlabel('parament magnitude/lg')
-        plt.title('第' + str(convLayerCnt) + '个BN层γ参数分布CDF', FontProperties=font)
-        plt.savefig("./fig/" + str(convLayerCnt) + "_γ_cdf.jpg")
-        plt.close()
-        bnLayerCnt += 1
+        plotAndSave(paraCnt, "第" + layerCntStr + "层（BN层）γ参数分布CDF", "./fig/" + layerCntStr + "_γ_cdf.jpg")
+    layerCnt += 1
     paraCnt = np.zeros(11)
-
-# a = torch.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [3.0, 3.0, 3.0]])
-# b = torch.tensor([[2.0, 4.0, 6.0], [4.0, 5.0, 6.0], [-3.0, -3.0, -3.0]])
-# print(torch.cosine_similarity(a, b, dim=1))
-# a.resize_(9)
-# b.resize_(9)
-# print(torch.cosine_similarity(a, b, dim=0))
-# print(torch.cosine_similarity(vgg.features[0].weight.data[0][0].view(9), vgg.features[0].weight.data[0][1].view(9), dim=0))
+    paraCntL1 = np.zeros(11)
