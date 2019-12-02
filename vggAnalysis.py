@@ -50,12 +50,14 @@ for f in vgg.features:
         print(layerCnt, '\t', f)
         filterCnt, channelCnt, kernelWidth, kernelHeight = f.weight.size()[0], f.weight.size()[1], f.weight.size()[2], f.weight.size()[3]
         filterSize = channelCnt * kernelWidth * kernelHeight
-        totalSize = filterCnt * filterSize
+        totalCnt = filterCnt * filterSize
+        kernelCnt = filterCnt * channelCnt
+        kernelSize = kernelWidth * kernelHeight
         # 将一层中的所有卷积核展平，成为二维数组
         allFilter1d = f.weight.data.view(filterCnt, filterSize).numpy()
         # 统计同一层之间卷积核相关系数
         allFilterSimilarity = np.corrcoef(allFilter1d)
-        # 统计卷积核的权重以及L1范数的分布
+        # 统计卷积核的权重以及L1范数的数量级分布
         for i in range(0, filterCnt):
             L1Norm = 0
             for j in range(0, filterSize):
@@ -63,10 +65,12 @@ for f in vgg.features:
                 L1Norm += abs(curWeight)
                 powerResTemp = powerRes(curWeight)
                 paraCnt[powerResTemp] += 1
-            powerResTemp = powerRes(L1Norm)
-            paraCntL1[powerResTemp] += 1
-        paraCnt /= totalSize
-        paraCntL1 /= filterCnt
+                if (j + 1) % kernelSize == 0:
+                    powerResTemp = powerRes(L1Norm)
+                    paraCntL1[powerResTemp] += 1
+                    L1Norm = 0
+        paraCnt /= totalCnt
+        paraCntL1 /= kernelCnt
         # 绘制相关系数热图
         ax = sns.heatmap(allFilterSimilarity)
         plt.title("第" + layerCntStr + "层（卷积层）卷积核相关系数热图", FontProperties=font)

@@ -15,3 +15,17 @@
 - 量化不够细致，某些折线图形状略为极端；
 - 热图横纵坐标过多（最大512×512），视觉效果并没有那么好；
 - 以及对python和matplotlib的不熟练。
+
+## VGG16_BN网络的搭建
+
+VGG网络结构模型参考：https://www.jianshu.com/p/82ab7e5e8961
+
+训练和反向传播模型参考：https://github.com/L1aoXingyu/code-of-learn-deep-learning-with-pytorch
+
+基于CIFAR_10数据集进行训练和测试。
+
+#### 存在的一些问题
+
+- 准确率比较低，仅达到87%左右
+- 训练函数需要将优化器作为参数传递进去，不方便中途修改（后发现可分解成多次训练）
+- 对于SGD中参数，如动量理解不够深刻
