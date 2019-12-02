@@ -3,6 +3,7 @@ import torch
 from torch import nn
 from torch.autograd import Variable
 from torchvision.datasets import CIFAR10
+from torchvision import transforms
 from datetime import datetime
 
 
@@ -110,13 +111,12 @@ def make_layers(cfg, batch_norm=False):
     return nn.Sequential(*layers)
 
 
-def data_tf(x):
-    x = np.array(x, dtype='float32') / 255
-    x = (x - 0.5) / 0.5  # 标准化
-    x = x.transpose((2, 0, 1))  # 将 channel 放到第一维
-    x = torch.from_numpy(x)
-    return x
-
+data_tf = transforms.Compose([
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomCrop(32, 4),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+])
 
 train_set = CIFAR10('../data', train=True, transform=data_tf, download=False)
 train_data = torch.utils.data.DataLoader(train_set, batch_size=64, shuffle=True)
@@ -124,12 +124,11 @@ test_set = CIFAR10('../data', train=False, transform=data_tf, download=False)
 test_data = torch.utils.data.DataLoader(test_set, batch_size=128, shuffle=False)
 
 net = VGG(make_layers(vggStructure, batch_norm=True))
-optimizer = torch.optim.SGD(net.parameters(), lr=1e-1, momentum=0.1, dampening=0, weight_decay=0.001)
 criterion = nn.CrossEntropyLoss()
-train(net, train_data, test_data, 10, optimizer, criterion)
 
-optimizer = torch.optim.SGD(net.parameters(), lr=1e-2, momentum=0.1, dampening=0, weight_decay=0.001)
-train(net, train_data, test_data, 10, optimizer, criterion)
+learningRate = 0.1
 
-optimizer = torch.optim.SGD(net.parameters(), lr=1e-3, momentum=0.1, dampening=0, weight_decay=0.001)
-train(net, train_data, test_data, 10, optimizer, criterion)
+for i in range(0, 3):
+    optimizer = torch.optim.SGD(net.parameters(), learningRate, momentum=0.9, dampening=0, weight_decay=5e-4)
+    train(net, train_data, test_data, 100, optimizer, criterion)
+    learningRate /= 10
