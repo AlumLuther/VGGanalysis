@@ -3,8 +3,10 @@
     <words>
       <w>conv</w>
       <w>corrcoef</w>
+      <w>dataset</w>
       <w>heatmap</w>
       <w>parament</w>
+      <w>pred</w>
     </words>
   </dictionary>
 </component>

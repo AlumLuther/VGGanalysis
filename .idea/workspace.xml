@@ -2,99 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c354e233-4219-48a7-ae83-449bdc870974" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/vggEvaluate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/94309.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/94309.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/11_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/12_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/12_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/15_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/16_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/16_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/18_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/19_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/19_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/1_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/21_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/22_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/22_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/25_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/26_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/26_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/28_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/29_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/29_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/2_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/2_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/31_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/32_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/32_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/35_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/36_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/36_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/38_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/39_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/39_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/41_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/42_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/42_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/4_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/5_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/5_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_conv_L1norm_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_conv_L1norm_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_conv_corrcoef_heatmap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_conv_para_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/8_conv_para_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/9_γ_cdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fig/9_γ_pdf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vggAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/vggAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vggClassify.py" beforeDir="false" afterPath="$PROJECT_DIR$/vggClassify.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -133,7 +43,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.vggAnalysis">
+  <component name="RunManager" selected="Python.vggClassify">
     <configuration name="temp" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="VGGanalysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -220,9 +130,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.vggClassify" />
         <item itemvalue="Python.vggAnalysis" />
         <item itemvalue="Python.temp" />
-        <item itemvalue="Python.vggClassify" />
         <item itemvalue="Python.vgg" />
       </list>
     </recent_temporary>

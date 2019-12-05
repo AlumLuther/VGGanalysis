@@ -1,10 +1,44 @@
-import numpy as np
 import torch
 from torch import nn
 from torch.autograd import Variable
 from torchvision.datasets import CIFAR10
 from torchvision import transforms
 from datetime import datetime
+
+
+def myEvaluate(model, test_dataset, test_loader, criterion):
+    if torch.cuda.is_available():
+        model = model.cuda()
+    model.eval()  # 模型评估
+    eval_loss = 0
+    eval_acc = 0
+    for data in test_loader:  # 测试模型
+        img, label = data
+        if torch.cuda.is_available():
+            img = Variable(img).cuda()
+            label = Variable(label).cuda()
+        else:
+            img = Variable(img)
+            label = Variable(label)
+        out = model(img)
+        loss = criterion(out, label)
+        eval_loss += loss.item() * label.size(0)
+        _, pred = torch.max(out, 1)
+        num_correct = (pred == label).sum()
+        eval_acc += num_correct.item()
+    print('Test Loss: {:.6f}, Acc: {:.6f}'.format(eval_loss / (len(
+        test_dataset)), eval_acc / (len(test_dataset))))
+    print()
+
+
+def saveModel(model):
+    torch.save(model.state_dict(), '../myVGG16_BN.pth')
+
+
+def loadModel():
+    resModel = myVGG(make_layers(vggStructure, batch_norm=True))
+    resModel.load_state_dict(torch.load('../myVGG16_BN.pth'))
+    return resModel
 
 
 def get_acc(output, label):
@@ -75,8 +109,8 @@ def train(net, train_data, valid_data, num_epochs, optimizer, criterion):
 vggStructure = [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M']
 
 
-class VGG(nn.Module):
-    def __init__(self, features, num_class=100):
+class myVGG(nn.Module):
+    def __init__(self, features, num_class=10):
         super().__init__()
         self.features = features
         self.classifier = nn.Sequential(
@@ -123,12 +157,19 @@ train_data = torch.utils.data.DataLoader(train_set, batch_size=64, shuffle=True)
 test_set = CIFAR10('../data', train=False, transform=data_tf, download=False)
 test_data = torch.utils.data.DataLoader(test_set, batch_size=128, shuffle=False)
 
-net = VGG(make_layers(vggStructure, batch_norm=True))
+myNet = myVGG(make_layers(vggStructure, batch_norm=True))
+learningRate = 0.1
+optimizer = torch.optim.SGD(myNet.parameters(), learningRate, momentum=0.9, dampening=0, weight_decay=5e-4)
 criterion = nn.CrossEntropyLoss()
 
-learningRate = 0.1
-
 for i in range(0, 3):
-    optimizer = torch.optim.SGD(net.parameters(), learningRate, momentum=0.9, dampening=0, weight_decay=5e-4)
-    train(net, train_data, test_data, 100, optimizer, criterion)
+    train(myNet, train_data, test_data, 100, optimizer, criterion)
     learningRate /= 10
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = learningRate
+
+myEvaluate(myNet, test_set, test_data, criterion)
+saveModel(myNet)
+
+myNet = loadModel()
+myEvaluate(myNet, test_set, test_data, criterion)
