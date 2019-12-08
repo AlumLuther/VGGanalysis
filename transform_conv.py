@@ -40,7 +40,6 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("using: " + torch.cuda.get_device_name(torch.cuda.current_device()) + " of capacity: " + str(
         torch.cuda.get_device_capability(torch.cuda.current_device())))
-    '''选择网络模型'''
     net = models.vgg16_bn()
     net.load_state_dict(torch.load('../vgg16_bn-6c64b313.pth'))
     net.to(device)
@@ -51,7 +50,7 @@ def power_res(weight):
     """
     calculate the magnitude of parameter
     :param weight: parameter itself
-    :return: magnitude of parameter, that is lg(abs(weight))
+    :return: magnitude of parameter, that is lg(abs(weight))+10
     """
     if weight < 0:
         weight = -weight
@@ -64,15 +63,14 @@ def power_res(weight):
     return res
 
 
-# 绘制并保存折线图
 def plot_save(w_space, w_freq, title, filename):
     """
-
-    :param w_space:
-    :param w_freq:
-    :param title:
-    :param filename:
-    :return:
+    draw and save line chart
+    :param w_space: parameter count in spatial domain
+    :param w_freq: parameter count in frequency domain
+    :param title: chart title
+    :param filename: path for file saving
+    :return: none
     """
     x_major_locator = MultipleLocator(1)
     y_major_locator = MultipleLocator(0.1)

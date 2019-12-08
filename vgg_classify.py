@@ -13,7 +13,7 @@ def get_acc(output, label):
     return num_correct / total
 
 
-def myEvaluate(model, test_loader, criterion):
+def evaluate(model, test_loader, criterion):
     if torch.cuda.is_available():
         model = model.cuda()
     model.eval()  # 模型评估
@@ -69,21 +69,21 @@ def train(net, train_data, test_data, num_epochs, optimizer, criterion):
 
         epoch_str = ("Epoch {%d}. ".format(epoch))
         train_str = ("Train Loss: {:.6f}, Train Acc: {:.6f}, ".format(train_loss / len(train_data), train_acc / len(train_data)))
-        test_str = myEvaluate(net, test_data, criterion)
+        test_str = evaluate(net, test_data, criterion)
         print(epoch_str + train_str + test_str + time_str)
 
 
-def saveModel(model, path):
+def save_model(model, path):
     torch.save(model.state_dict(), path)
 
 
-def loadModel(path):
-    resModel = myVGG(make_layers(vggStructure, batch_norm=True))
+def load_model(path):
+    resModel = MyVGG(make_layers(vgg_structure, batch_norm=True))
     resModel.load_state_dict(torch.load(path))
     return resModel
 
 
-class myVGG(nn.Module):
+class MyVGG(nn.Module):
     def __init__(self, features, num_class=10):
         super().__init__()
         self.features = features
@@ -127,28 +127,29 @@ data_tf = transforms.Compose([
 ])
 
 data_path = '../data'
-model_path = '../myVGG16_BN.pth'
+model_path = '../MyVGG16_BN.pth'
 
 train_set = CIFAR10(data_path, train=True, transform=data_tf, download=False)
 train_data = torch.utils.data.DataLoader(train_set, batch_size=64, shuffle=True)
 test_set = CIFAR10(data_path, train=False, transform=data_tf, download=False)
 test_data = torch.utils.data.DataLoader(test_set, batch_size=128, shuffle=False)
 
-vggStructure = [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M']
-myNet = myVGG(make_layers(vggStructure, batch_norm=True))
+vgg_structure = [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M']
+net = MyVGG(make_layers(vgg_structure, batch_norm=True))
 
-learningRate = 0.1
-optimizer = torch.optim.SGD(myNet.parameters(), learningRate, momentum=0.9, dampening=0, weight_decay=5e-4)
+learning_rate = 0.1
+optimizer = torch.optim.SGD(net.parameters(), learning_rate, momentum=0.9, dampening=0, weight_decay=5e-4)
 criterion = nn.CrossEntropyLoss()
 
+# model training
 for i in range(0, 3):
-    train(myNet, train_data, test_data, 10, optimizer, criterion)
-    learningRate /= 10
+    train(net, train_data, test_data, 100, optimizer, criterion)
+    learning_rate /= 10
     for param_group in optimizer.param_groups:
-        param_group['lr'] = learningRate
+        param_group['lr'] = learning_rate
 
-myEvaluate(myNet, test_data, criterion)
-saveModel(myNet, model_path)
+evaluate(net, test_data, criterion)
+save_model(net, model_path)
 
-myNet = loadModel(model_path)
-myEvaluate(myNet, test_data, criterion)
+myNet = load_model(model_path)
+evaluate(myNet, test_data, criterion)
