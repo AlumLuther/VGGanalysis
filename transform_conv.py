@@ -1,12 +1,14 @@
 import torch
-import cv2
 import torchvision.models as models
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import math
+import cv2
 import os
 
 from matplotlib.font_manager import FontProperties
+from matplotlib.ticker import MultipleLocator
 
 
 def conv_to_matrix(conv):
@@ -45,33 +47,43 @@ if __name__ == "__main__":
     freq_matrix = conv_dct(net)
 
 
-# num_tmp = 0
-# for f in net.features:
-#     if isinstance(f, torch.nn.Conv2d):
-#         print(f.weight.size(), freq_matrix[num_tmp].shape)
-#         num_tmp += 1;
-
-
-# 计算参数的数量级
-def powerRes(myNum):
-    if myNum < 0:
-        myNum = -myNum
-    res = 10
-    if myNum < 1:
-        if myNum < 1e-10:
-            res = 0
-            return res
-        while myNum < 1:
-            myNum *= 10
-            res -= 1
+def power_res(weight):
+    """
+    calculate the magnitude of parameter
+    :param weight: parameter itself
+    :return: magnitude of parameter, that is lg(abs(weight))
+    """
+    if weight < 0:
+        weight = -weight
+    if weight > 1:
+        return 10
+    elif weight < 1e-10:
+        return 0
+    else:
+        res = math.floor(math.log(weight, 10)) + 10
     return res
 
 
 # 绘制并保存折线图
-def plotAndSave(w_space, w_freq, title, filename):
+def plot_save(w_space, w_freq, title, filename):
+    """
+
+    :param w_space:
+    :param w_freq:
+    :param title:
+    :param filename:
+    :return:
+    """
+    x_major_locator = MultipleLocator(1)
+    y_major_locator = MultipleLocator(0.1)
+    ax = plt.gca()
+    ax.xaxis.set_major_locator(x_major_locator)
+    ax.yaxis.set_major_locator(y_major_locator)
+    plt.xlim(-10.5, 0.5)
+    plt.ylim(-0.05, 1.05)
     plt.plot(np.arange(-10, 1), w_space, color="red", label='Parameters in spatial domain')
     plt.plot(np.arange(-10, 1), w_freq, color="skyblue", label='Parameters in frequency domain')
-    plt.legend()
+    plt.legend(loc='upper left')
     plt.ylabel('percentage')
     plt.xlabel('parament magnitude/lg')
     plt.title(title, FontProperties=font)
@@ -79,7 +91,7 @@ def plotAndSave(w_space, w_freq, title, filename):
     plt.close()
 
 
-convLayerCnt = 1
+conv_layer_cnt = 1
 para_cnt_space = np.zeros(11)
 para_cnt_freq = np.zeros(11)
 sns.set()
@@ -93,27 +105,25 @@ font = FontProperties(fname=r"C:\Windows\Fonts\simhei.ttf", size=14)
 
 for f in net.features:
     if isinstance(f, torch.nn.Conv2d):
-        print(convLayerCnt, '\t', f)
-        filterCnt, channelCnt, kernelWidth, kernelHeight = f.weight.size()[0], f.weight.size()[1], f.weight.size()[2], f.weight.size()[3]
-        filterSize = channelCnt * kernelWidth * kernelHeight
-        totalCnt = filterCnt * filterSize
-        allFilter1d = f.weight.data.view(filterCnt, filterSize).cpu().numpy()
-        curFreqMatrix = freq_matrix[convLayerCnt - 1]
-        for i in range(0, filterCnt):
-            for j in range(0, filterSize):
-                curWeight = allFilter1d[i][j]
-                powerResTemp = powerRes(curWeight)
-                para_cnt_space[powerResTemp] += 1
-                curWeight = curFreqMatrix[j][i]
-                powerResTemp = powerRes(curWeight)
-                para_cnt_freq[powerResTemp] += 1
-        para_cnt_space /= totalCnt
-        para_cnt_freq /= totalCnt
-        plotAndSave(para_cnt_space, para_cnt_freq, "第" + str(convLayerCnt) + "卷积层卷积核参数分布PDF", "./fig_comp/pdf/" + str(convLayerCnt) + ".jpg")
-        for i in range(1, len(para_cnt_freq)):
-            para_cnt_space[i] += para_cnt_freq[i - 1]
+        print(conv_layer_cnt, '\t', f)
+        filter_cnt, channel_cnt, kernel_width, kernel_weight = f.weight.size()[0], f.weight.size()[1], f.weight.size()[2], f.weight.size()[3]
+        filter_size = channel_cnt * kernel_width * kernel_weight
+        total_cnt = filter_cnt * filter_size
+        filters_space = f.weight.data.view(filter_cnt, filter_size).cpu().numpy()
+        filters_freq = freq_matrix[conv_layer_cnt - 1]
+        for i in range(0, filter_cnt):
+            for j in range(0, filter_size):
+                cur_weight = filters_space[i][j]
+                para_cnt_space[power_res(cur_weight)] += 1
+                cur_weight = filters_freq[j][i]
+                para_cnt_freq[power_res(cur_weight)] += 1
+        para_cnt_space /= total_cnt
+        para_cnt_freq /= total_cnt
+        plot_save(para_cnt_space, para_cnt_freq, "第" + str(conv_layer_cnt) + "卷积层卷积核参数分布PDF", "./fig_comp/pdf/" + str(conv_layer_cnt) + ".jpg")
+        for i in range(1, len(para_cnt_space)):
+            para_cnt_space[i] += para_cnt_space[i - 1]
             para_cnt_freq[i] += para_cnt_freq[i - 1]
-        plotAndSave(para_cnt_space, para_cnt_freq, "第" + str(convLayerCnt) + "卷积层卷积核参数分布CDF", "./fig_comp/cdf/" + str(convLayerCnt) + ".jpg")
-        convLayerCnt += 1
+        plot_save(para_cnt_space, para_cnt_freq, "第" + str(conv_layer_cnt) + "卷积层卷积核参数分布CDF", "./fig_comp/cdf/" + str(conv_layer_cnt) + ".jpg")
+        conv_layer_cnt += 1
         para_cnt_space = np.zeros(11)
         para_cnt_freq = np.zeros(11)
